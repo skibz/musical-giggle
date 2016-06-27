@@ -1,0 +1,25 @@
+{
+  "name": "musical-giggle",
+  "version": "0.0.0",
+  "private": true,
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "istanbul test _mocha -- --recursive -R spec",
+    "coverage": "istanbul cover _mocha --report lcovonly -- test --recursive -R spec"
+  },
+  "keywords": [],
+  "author": "Ant Cosentino <ant@io.co.za>",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "cors": "^2.7.1",
+    "express": "^4.13.4",
+    "morgan": "^1.7.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "istanbul": "^0.4.3",
+    "mocha": "^2.5.3"
+  }
+}
