@@ -4,7 +4,7 @@
 module.exports = {
   uri: '/healthcheck',
   method: 'get',
-  handler: function(req, res) {
-    return res.status(200).end()
+  callback: function(req, res) {
+    return res.json({healthy: true}, 200)
   }
 }

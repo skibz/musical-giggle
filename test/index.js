@@ -6,20 +6,26 @@ var http = require('http')
 var chai = require('chai')
 var expect = chai.expect
 
-var server = require('../'), server;
+var server = require('../'), instance;
 
-describe('server', function() {
+before(function(done) {
+  instance = server(8888, done)
+})
 
-  before(function(done) {
-    server = server(8888, done)
-  })
+after(function(done) {
+  instance.close(done)
+})
 
-  after(function(done) {
-    server.close(done)
-  })
+describe('server', function () {
+  it('should respond over http', function (done) {
+    http.get(
+      'http://localhost:8888/',
+      done.bind(done, null)
+    ).on('error', done)
+  });
 
-  it('should return 404 if the uri does not exist', function(done) {
-    http.get('http://localhost:8888/ljasdfljsdf', function(res) {
+  it('should return 404 if the uri does not exist', function (done) {
+    http.get('http://localhost:8888/testing', function(res) {
       expect(res.statusCode).to.equal(404)
       done()
     }).on('error', done)

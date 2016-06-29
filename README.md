@@ -3,7 +3,7 @@
 
 this scaffold follows a convention of exporting routes from any file in the `src/controllers` directory.
 
-testability is achieved by only importing the route handlers into the test harness runtime and then mocking the request and response streams to avoid hitting a live http server.
+tested by importing the route handlers into the test runtime and then mocking the request and response streams to avoid hitting a live http server.
 
 ##### routes
 
@@ -20,7 +20,7 @@ module.exports = {
 
 ##### todos
 
-* recursive directory walking from `src/controllers`
-* route and test generator
-* factor out mocking of express's request and response streams
-* codeclimate test coverage reporting
+* [ ] recursive directory walking from `src/controllers`
+* [ ] route and test generator
+* [x] factor out mocking of express's request and response streams
+* [ ] codeclimate test coverage reporting
