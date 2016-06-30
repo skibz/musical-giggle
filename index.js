@@ -21,12 +21,12 @@ if (!TESTING && NODE_ENV === 'development') {
 }
 
 fs.readdirSync(
-  __dirname + '/routes'
+  `${__dirname}/routes`
 ).map(function(file) {
-  return require('./routes/' + file)
+  return require(`./routes/${file}`)
 }).reduce(function(prev, curr) {
   return prev.concat(curr)
-}).forEach(function (route) {
+}).forEach(function(route) {
   server[route.method](
     route.uri,
     route.callback
