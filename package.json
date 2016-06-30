@@ -7,6 +7,7 @@
   "scripts": {
     "test": "istanbul test _mocha -- --recursive -R spec",
     "test-routes": "istanbul test _mocha -- test/routes --recursive -R spec",
+    "new-route": "./bin/new-route",
     "coverage": "istanbul cover _mocha --report lcovonly -- test --recursive -R spec"
   },
   "keywords": [],

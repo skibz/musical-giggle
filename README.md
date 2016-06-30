@@ -1,17 +1,41 @@
 
 # musical-giggle
 
-drop your route callbacks into file(s) in the `routes` directory and complement each route with an associated unit test in `tests`.
-
 ```bash
+# generate a new route and unit test
+npm run new-route "my route"
 # run unit tests for your route callbacks (fast)
 npm run test-routes
 # or, test your http socket and route callbacks (not fast)
-npm run test
+npm test
+```
+
+```
+.
+├── .editorconfig
+├── .gitignore
+├── .nvmrc
+├── .travis.yml
+├── LICENSE
+├── README.md
+├── bin
+│   └── new-route
+├── index.js
+├── package.json
+├── routes
+│   ├── example.js
+│   └── healthcheck.js
+└── test
+    ├── index.js
+    └── routes
+        ├── example.js
+        └── healthcheck.js
+
+4 directories, 14 files
 ```
 
 ##### todos
 
-* [ ] route and test generator
+* [x] route and test generator
 * [x] factor out mocking of express's request and response streams
 * [ ] codeclimate test coverage reporting

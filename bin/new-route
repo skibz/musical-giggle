@@ -1,0 +1,74 @@
+#!/usr/bin/env node
+
+var command = process.argv[0]
+var script = process.argv[1]
+var routeName = process.argv[2]
+
+var fs = require('fs')
+
+if (!routeName) {
+  return process.stdout.write('new-route ERROR: No route name given\n', function () {
+    process.exit()
+  })
+}
+
+routeName = routeName.split(' ').join('-')
+
+var routeTemplate = (
+`
+'use strict'
+
+module.exports = [
+  {
+    uri: '/${routeName}',
+    method: 'get',
+    callback: function (req, res) {
+      return res.end('hello, world')
+    }
+  }
+]
+`
+), testTemplate = (
+`
+'use strict'
+
+var chai = require('chai')
+chai.use(require('sinon-chai'))
+var expect = chai.expect
+var express = require('sinon-express-mock')
+
+var route = require('../../routes/${routeName}')[0]
+
+describe(\`\${route.method.toUpperCase()} \${route.uri}\`, function() {
+  it('should send a response', function () {
+    var res = express.mockRes()
+    route.callback(null, res)
+    expect(res.end).to.be.called
+  })
+})
+`
+)
+
+if (!fs.existsSync(`${__dirname}/../routes/${routeName}.js`)) {
+  return fs.createWriteStream(
+    `${__dirname}/../routes/${routeName}.js`
+  ).end(routeTemplate, function () {
+    fs.createWriteStream(
+      `${__dirname}/../test/routes/${routeName}.js`
+    ).end(testTemplate, function () {
+      process.stdout.write(
+        `new-route NOTICE: created test/routes/${routeName}.js\n`,
+        function () {
+          process.stdout.write(
+            `new-route NOTICE: created routes/${routeName}.js\n`,
+            process.exit
+          )
+        }
+      )
+    })
+  })
+}
+return process.stdout.write(
+  `new-route ERROR: A route named '${routeName}' already exists\n`,
+  process.exit
+)

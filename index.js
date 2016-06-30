@@ -9,7 +9,7 @@ var bodyParser = require('body-parser')
 var express = require('express')
 
 var NODE_ENV = process.env.NODE_ENV || 'development'
-var TESTING = (process.env._ || '').indexOf('istanbul') > -1
+var TESTING = NODE_ENV === 'testing' || (process.env._ || '').indexOf('istanbul') > -1
 
 var server = express()
 
