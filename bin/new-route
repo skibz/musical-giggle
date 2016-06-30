@@ -7,9 +7,10 @@ var routeName = process.argv[2]
 var fs = require('fs')
 
 if (!routeName) {
-  return process.stdout.write('new-route ERROR: No route name given\n', function () {
-    process.exit()
-  })
+  return process.stdout.write(
+    'new-route ERROR: No route name given\n',
+    process.exit
+  )
 }
 
 routeName = routeName.split(' ').join('-')
